@@ -76,7 +76,7 @@ class Client(object):
                 if dict_json["data"][0]["resources"][0]["values"]["admin_state"] == 'down':
                     self.msg = "L'interface {} est passé du statut up au statut down ".format(port_name)
                     print(self.msg)
-                    self.sendslackbot()
+                    self.sendslackapp()
                 else:
                     print("L'interface {} est passé du statut down au statut up ".format(port_name))
                     lldp_nei = self.getlldp(dict_json["data"][0]["resources"][0]['uri'])
@@ -85,7 +85,7 @@ class Client(object):
                     self.msg = "L'interface {} est passé du statut down au statut up \nLe neighbor LLDP est : {} - Adresse IP : {}".format(
                         port_name, lldp_nei[0]["neighbor_info"]['chassis_name'],
                         lldp_nei[0]["neighbor_info"]['mgmt_ip_list'])
-                    self.sendslackbot()
+                    self.sendslackapp()
             if msg is None:
                 print("connection closed")
                 self.ws = None
@@ -150,8 +150,8 @@ class Client(object):
         json_dict["topics"] = topic_list
         return json_dict
 
-    def sendslackbot(self):
-        slack_url = "https://hooks.slack.com/services/<slackbot_token>"
+    def sendslackapp(self):
+        slack_url = "https://hooks.slack.com/services/<slackapp_token>"
         payload = {"blocks": [{
             "type": "section",
             "text": {
