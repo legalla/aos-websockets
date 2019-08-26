@@ -5,10 +5,10 @@ Script related to post on Aurba Airheads Community - French Forum :<br>
 
 Requirements :<br>
 
-- tornado<br>
+- tornado==5.0.2<br>
 - sys<br>
 - traceback<br>
-- requests<br>
+- requests==2.18.4<br>
 - ssl<br>
 
 In the script, replace the following variables :<br>
