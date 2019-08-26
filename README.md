@@ -11,8 +11,8 @@ traceback<br>
 requests<br>
 ssl<br>
 
-In the script, replace the following variables :
-<username> : Your username to connect to your CX device<br>
-<password> : Your password to connect to your CX device<br>
-<cx_ip> : Your CX device's IP<br>
-<slackbot_token> : The token used to connect and send messages to your SlackBot<br>
+In the script, replace the following variables :<br>
+"<username>" : Your username to connect to your CX device<br>
+"<password>" : Your password to connect to your CX device<br>
+"<cx_ip>" : Your CX device's IP<br>
+"<slackbot_token>" : The token used to connect and send messages to your SlackBot<br>
