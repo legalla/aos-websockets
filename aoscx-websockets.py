@@ -22,8 +22,8 @@ from tornado.websocket import websocket_connect
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-USER = '<username>'
-PASSWORD = '<password>'
+USER = '<cx_username>'
+PASSWORD = '<cx_password>'
 
 PROXY_DICT = {'http': None, 'https': None}
 REQUEST_TIMEOUT = 50
@@ -63,7 +63,7 @@ class Client(object):
             self.count = self.count + 1
             if self.count == 1:
                 print("Reponse à la subscription : \n{}".format(msg))
-                msg_in_json = self.check_if_JSON(msg)
+                msg_in_json = self.check_if_json(msg)
                 if msg_in_json is not None:
                     success_test = self.check_if_success(msg_in_json)
                     if success_test:
@@ -76,16 +76,16 @@ class Client(object):
                 if dict_json["data"][0]["resources"][0]["values"]["admin_state"] == 'down':
                     self.msg = "L'interface {} est passé du statut up au statut down ".format(port_name)
                     print(self.msg)
-                    self.sendSlackBot()
+                    self.sendslackbot()
                 else:
                     print("L'interface {} est passé du statut down au statut up ".format(port_name))
-                    lldp_nei = self.getLLDP(dict_json["data"][0]["resources"][0]['uri'])
+                    lldp_nei = self.getlldp(dict_json["data"][0]["resources"][0]['uri'])
                     print("Le neighbor LLDP est : {} - Adresse IP : {}".format(
                         lldp_nei[0]["neighbor_info"]['chassis_name'], lldp_nei[0]["neighbor_info"]['mgmt_ip_list']))
                     self.msg = "L'interface {} est passé du statut down au statut up \nLe neighbor LLDP est : {} - Adresse IP : {}".format(
                         port_name, lldp_nei[0]["neighbor_info"]['chassis_name'],
                         lldp_nei[0]["neighbor_info"]['mgmt_ip_list'])
-                    self.sendSlackBot()
+                    self.sendslackbot()
             if msg is None:
                 print("connection closed")
                 self.ws = None
